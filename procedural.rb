@@ -18,24 +18,24 @@
 # # p stock.sort.to_h
 
 #add item
-puts "Please enter the amount of ingredients:"
-user_input = gets.chomp.to_i
+# puts "Please enter the amount of ingredients:"
+# user_input = gets.chomp.to_i
 
 
 
-def new_ingrdient(number)
-  items = []
-  hash = {}
-  number.times do
-    puts "Name:"
-    ingredient_name = gets.chomp 
-    puts "Amount: "
-    ingredient_amount = gets.chomp.to_i
-    hash[ingredient_name] = ingredient_amount
-    items.push(hash)
-    hash = {}
-  end
-  return items
-end
+# def new_ingrdients(number)
+#   items = []
+#   hash = {}
+#   number.times do
+#     puts "Name:"
+#     ingredient_name = gets.chomp 
+#     puts "Amount: "
+#     ingredient_amount = gets.chomp.to_i
+#     hash[ingredient_name] = ingredient_amount
+#     items.push(hash)
+#     hash = {}
+#   end
+#   return items
+# end
 
-p new_ingrdient(user_input)
+# p new_ingrdients(user_input)

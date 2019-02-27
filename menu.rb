@@ -1,15 +1,13 @@
+
 class Menu
 
-  @@stock = {"foamed_milk" => 10, "grounds" => 10, "hot_water" => 10}
-
-  def menu
-    @menu = {
-  "1" => {"name" => "coffee", "ingredients" => [{"grounds" => 1}, {"hot_water" => 2}]},
-  "2" => {"name" => "cappuccino", "ingredients" => [{"grounds" => 1}, {"foamed_milk" => 2}]},
-  "3" => {"name" => "espresso", "ingredients" => [{"grounds" => 3}]},
-  "4" => {"name" => "americano", "ingredients" => [{"grounds" => 1}, {"hot_water" => 4}]}  
+  @@stock = {"vanilla" => 10, "cherry" => 10, "lime" => 10, "coke" => 10, "dr. pepper" => 10, "diet coke" => 10, "soda" => 10}
+  @@menu = {
+  "1" => {"name" => "Vanilla Coke", "ingredients" => [{"vanilla" => 1}, {"coke" => 2}]},
+  "2" => {"name" => "Cherry Dr.Pepper", "ingredients" => [{"cherry" => 2}, {"dr. pepper" => 2}]},
+  "3" => {"name" => "Lime Diet Coke", "ingredients" => [{"lime" => 3}, {"diet coke" => 2}]},
+  "4" => {"name" => "Soda", "ingredients" => [{"soda" => 4}]}  
   }
-  end
 
   def print_menu
     user_menu = []
@@ -21,15 +19,26 @@ class Menu
     return user_menu
   end
 
-  def add_menu_item(number, name, ingredients, amount)
-    @new_menu_item = {number => {"name" => name, "ingredients" => [{ingredients => amount}]}}
-    @menu = @menu.merge(@new_menu_item)
-    return @menu
+  def add_menu_item(number, name)
+    @new_menu_item = {number => {"name" => name, "ingredients" => new_ingredients}}
+    @@menu = @@menu.merge(@new_menu_item)
+    return @@menu
   end
 
-  # def stock
-  #   @stock = {"foamed_milk" => 10, "grounds" => 10, "hot_water" => 10}
-  # end
+  def new_ingredients
+    items = []
+    hash = {}
+    2.times do
+      puts "Name:"
+      ingredient_name = gets.chomp 
+      puts "Amount: "
+      ingredient_amount = gets.chomp.to_i
+      hash[ingredient_name] = ingredient_amount
+      items.push(hash)
+      hash = {}
+    end
+    return items
+  end
 
   def print_stock
     @stock.each do |k,v| 
@@ -37,6 +46,9 @@ class Menu
     end
   end
 end
+
+menu = Menu.new
+p menu.add_menu_item("5", "Latte")
 
 
 class User < Menu
@@ -48,10 +60,8 @@ class User < Menu
   def vend
     selection = menu[@user_input]
     grab_item = selection["ingredients"]
-    # p grab_item
     grab_item.length.times do |i|
       @@stock = grab_item[i].merge(@@stock) {|_, oldval, newval| newval - oldval }
-      p @@stock
     end
     return @@stock.sort.to_h
   end
@@ -59,6 +69,4 @@ class User < Menu
 end
 
 user = User.new("1")
-# p user.print_menu
-# p user.vend
-p user.print_menu
+
