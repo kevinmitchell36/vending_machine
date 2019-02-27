@@ -1,33 +1,6 @@
-
-menu = {
-  "1" => {"name" => "coffee", "ingredients" => [{"grounds" => 1}, {"hot water" => 2}]},
-  "2" => {"name" => "cappuccino", "ingredients" => [{"grounds" => 1}, {"foamed_milk" => 2}]},
-  "3" => {"name" => "espresso", "ingredients" => [{"grounds" => 3}]},
-  "4" => {"name" => "americano", "ingredients" => [{"grounds" => 1}, {"hot_water" => 4}]}  
-  }
-# p menu.length
-new_menu_item = {"5" => {"name" => "latte", "ingredients" => [{"grounds" => 1}, {"steamed_milk" => 3}]}}
-menu = menu.merge(new_menu_item)
-stock = {"foamed_milk" => 10, "grounds" => 10, "hot_water" => 10}
-user_input = "4"
-# p menu[user_input]["name"]
-selection = menu[user_input]
-fetch = selection["ingredients"]
-fetch.length.times do |i|
-  stock = fetch[i].merge(stock) {|_, oldval, newval| newval - oldval }
-end
-# p stock.sort.to_h
-
- 
-
 class Menu
 
   @@stock = {"foamed_milk" => 10, "grounds" => 10, "hot_water" => 10}
-
-  # def initialize
-  #   @stock = {"foamed_milk" => 10, "grounds" => 10, "hot_water" => 10}
-  # end
-
 
   def menu
     @menu = {
@@ -89,14 +62,3 @@ user = User.new("1")
 # p user.print_menu
 # p user.vend
 p user.print_menu
-
-stock = {"foamed_milk" => 10, "grounds" => 10, "hot_water" => 10}
-user_input = "4"
-# p menu[user_input]["name"]
-selection = menu[user_input]
-fetch = selection["ingredients"]
-# p fetch
-fetch.length.times do |i|
-  stock = fetch[i].merge(stock) {|_, oldval, newval| newval - oldval }
-end
-# p stock.sort.to_h
